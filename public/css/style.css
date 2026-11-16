@@ -1,0 +1,362 @@
+:root {
+  --gm-blue: #1a73e8;
+  --gm-text: #202124;
+  --gm-gray: #5f6368;
+  --gm-shadow: 0 2px 6px rgba(60, 64, 67, .3), 0 1px 2px rgba(60, 64, 67, .2);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: Roboto, "Segoe UI", system-ui, sans-serif;
+  color: var(--gm-text);
+}
+
+/* ===== Bản đồ toàn màn hình ===== */
+#map {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ===== Thanh tìm kiếm ===== */
+.gm-search {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1100;
+  width: 380px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--gm-shadow);
+  padding: 0 6px 0 16px;
+}
+
+.gm-search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 16px;
+}
+
+.gm-icon-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gm-gray);
+  font-size: 16px;
+  cursor: pointer;
+}
+.gm-icon-btn:hover { background: #f1f3f4; }
+.gm-search-btn { color: var(--gm-blue); }
+
+/* ===== Chip lọc nhanh ===== */
+.gm-chips {
+  position: fixed;
+  top: 13px;
+  left: 404px;
+  right: 170px;
+  z-index: 1100;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 4px 8px;
+  pointer-events: none;
+  scrollbar-width: none;
+}
+.gm-chips::-webkit-scrollbar { display: none; }
+
+.gm-chip {
+  pointer-events: auto;
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--gm-shadow);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.gm-chip:hover { background: #f1f3f4; }
+
+/* ===== Bảng kết quả ===== */
+.gm-panel {
+  position: fixed;
+  top: 68px;
+  left: 12px;
+  z-index: 1100;
+  width: 380px;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--gm-shadow);
+  overflow: hidden;
+}
+
+.gm-tabs {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e8eaed;
+}
+
+.gm-tab {
+  flex: 1;
+  padding: 12px 8px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--gm-gray);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.gm-tab.active {
+  color: var(--gm-blue);
+  border-bottom-color: var(--gm-blue);
+}
+
+.gm-badge {
+  margin-left: 4px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  background: #ea4335;
+  color: #fff;
+  font-size: 12px;
+}
+
+.gm-toggle {
+  width: 40px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--gm-gray);
+  cursor: pointer;
+  transition: transform .2s;
+}
+.gm-panel.collapsed .gm-toggle { transform: rotate(180deg); }
+
+.gm-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.gm-panel.collapsed .gm-body { display: none; }
+
+/* Mục kết quả */
+.result-item, .fav-info { cursor: pointer; }
+.gm-body .list-group-item { padding: 12px 16px; }
+
+.result-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e8f0fe;
+  font-size: 18px;
+}
+.result-text { min-width: 0; }
+
+/* ===== Nút vị trí của tôi ===== */
+.gm-fab {
+  position: fixed;
+  right: 7px;
+  bottom: 112px;
+  z-index: 1100;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--gm-shadow);
+  font-size: 20px;
+  cursor: pointer;
+}
+.gm-fab:hover { background: #f1f3f4; }
+.gm-fab.loading { opacity: .5; }
+
+/* ===== Ghim đỏ kiểu Google ===== */
+.gm-pin { background: none; border: none; }
+.gm-pin-body {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  background: #ea4335;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
+}
+.gm-pin-body::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a52714;
+}
+
+/* ===== Popup kiểu thẻ thông tin ===== */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+}
+.leaflet-popup-content {
+  margin: 14px 16px;
+  font: 14px/1.4 Roboto, "Segoe UI", system-ui, sans-serif;
+}
+
+/* ===== Nút tài khoản ===== */
+.gm-account {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1100;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: var(--gm-shadow);
+  color: var(--gm-text);
+  font-size: 14px;
+  cursor: pointer;
+}
+.gm-account:hover { background: #f1f3f4; }
+.gm-account-label {
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== Hộp thoại ===== */
+.gm-dialog {
+  width: min(380px, calc(100vw - 32px));
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .3);
+  padding: 20px;
+}
+.gm-dialog::backdrop { background: rgba(32, 33, 36, .45); }
+
+/* ===== Thông báo ===== */
+.gm-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 3000;
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #323232;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: var(--gm-shadow);
+  transform: translateX(-50%);
+}
+.gm-toast-error { background: #b3261e; }
+
+/* ===== Trang quản trị ===== */
+html:has(.admin-page), .admin-page {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+}
+.admin-page { background: #f1f3f4; }
+
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fff;
+  box-shadow: var(--gm-shadow);
+}
+
+.admin-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admin-stat, .admin-card {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--gm-shadow);
+}
+.admin-stat {
+  color: var(--gm-gray);
+  font-size: 13px;
+}
+.admin-stat-value {
+  display: block;
+  color: var(--gm-text);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.admin-search { max-width: 260px; }
+
+.admin-pager {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ===== Điện thoại ===== */
+@media (max-width: 768px) {
+  .gm-search  { top: 10px; left: 10px; right: 68px; width: auto; }
+  .gm-chips   { top: 62px; left: 6px; right: 6px; }
+  .gm-panel   { top: auto; left: 8px; right: 8px; bottom: 24px; width: auto; max-height: 40vh; }
+  .gm-fab     { top: 112px; bottom: auto; right: 12px; }
+  .gm-account { top: 10px; right: 10px; width: 48px; justify-content: center; padding: 0; }
+  .gm-account-label { display: none; }
+  .leaflet-control-zoom { display: none; }
+}

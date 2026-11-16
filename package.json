@@ -1,0 +1,26 @@
+{
+  "name": "web-ban-do",
+  "version": "2.0.0",
+  "description": "Ứng dụng web bản đồ tương tác hỗ trợ tìm kiếm và hiển thị địa điểm",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.16"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test",
+    "create-admin": "node --disable-warning=ExperimentalWarning server/scripts/create-admin.js",
+    "db:migrate": "node --disable-warning=ExperimentalWarning server/scripts/db.js migrate",
+    "db:status": "node --disable-warning=ExperimentalWarning server/scripts/db.js status",
+    "db:seed": "node --disable-warning=ExperimentalWarning server/scripts/db.js seed",
+    "db:backup": "node --disable-warning=ExperimentalWarning server/scripts/db.js backup",
+    "db:restore": "node --disable-warning=ExperimentalWarning server/scripts/db.js restore"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0"
+  }
+}
